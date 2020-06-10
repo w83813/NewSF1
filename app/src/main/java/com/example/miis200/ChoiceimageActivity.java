@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,7 +21,7 @@ public class ChoiceimageActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<ChoiceimageItemrecycler> choiceimageItemrecyclers = new ArrayList<>();
     private ChoiceimageAdapter adapter;
-    private Button_Click btnGetSelected;
+    private Button btn_printer;
 
     String patientid;
 
@@ -31,12 +34,33 @@ public class ChoiceimageActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.choiceimagerecyclerview);
 
+        btn_printer = findViewById(R.id.chimg_printer);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         adapter = new ChoiceimageAdapter(this, choiceimageItemrecyclers);
         recyclerView.setAdapter(adapter);
 
         createList();
+
+        btn_printer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(adapter.getSelected().size() == 0){
+                    showToast("No Selection.");
+                } else if(adapter.getSelected().size() > 4){
+                    showToast("Select up to four photos.");
+                } else {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for (int i = 0; i < adapter.getSelected().size(); i++) {
+                        stringBuilder.append(adapter.getSelected().get(i).getName());
+                        stringBuilder.append("\n");
+                    }
+                    showToast(stringBuilder.toString().trim());
+                }
+            }
+        });
+
     }
 
     private void createList() {
@@ -56,6 +80,10 @@ public class ChoiceimageActivity extends AppCompatActivity {
             choiceimageItemrecyclers.add(choiceimageItemrecycler);
         }
         adapter.setChoiceimageItemrecyclers(choiceimageItemrecyclers);
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
 }
