@@ -19,8 +19,8 @@ public class WaitviewimageActivity extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
     TextView wv_checktime,wv_name,wv_patientid,wv_birthday,wv_gender,wv_phonenumber;
-    Button btn_viewimage;
-    Intent mViewimageActivityIntent;
+    Button btn_viewimage,btn_printer;
+    Intent mViewimageActivityIntent,mChoiceimageActivityIntent;
 
     private RecyclerView recyclerView;
     private Eyeimage_ItemRecycler itemRecyclerSetting;
@@ -56,7 +56,9 @@ public class WaitviewimageActivity extends AppCompatActivity {
         wv_birthday = findViewById(R.id.wv_birthday);
         wv_gender = findViewById(R.id.wv_gender);
         wv_phonenumber = findViewById(R.id.wv_phonenumber);
+
         btn_viewimage = findViewById(R.id.btn_viewimage);
+        btn_printer = findViewById(R.id.wv_printer);
 
         Intent intent = this.getIntent();
         patientid = intent.getStringExtra("patientid");
@@ -67,6 +69,8 @@ public class WaitviewimageActivity extends AppCompatActivity {
         wv_phonenumber.setText(intent.getStringExtra("patientphonenumber"));
 
         mViewimageActivityIntent = new Intent(this,ViewimageActivity.class);
+
+        mChoiceimageActivityIntent = new Intent(this,ChoiceimageActivity.class);
 
         int imagesize = databaseHelper.getImagePath(intent.getStringExtra("patientid")).size();
 
@@ -90,6 +94,14 @@ public class WaitviewimageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mViewimageActivityIntent.putExtra("patientid",patientid);
                 startActivity(mViewimageActivityIntent);
+            }
+        });
+
+        btn_printer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mChoiceimageActivityIntent.putExtra("patientid",patientid);
+                startActivity(mChoiceimageActivityIntent);
             }
         });
 

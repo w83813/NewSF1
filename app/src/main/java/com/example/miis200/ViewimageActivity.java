@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +23,23 @@ public class ViewimageActivity extends AppCompatActivity {
     private List<Eyeimage_ItemRecycler> listRecycler = new ArrayList<Eyeimage_ItemRecycler>(  );
     String patientid;
 
+    private Button printer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewimage);
 
         databaseHelper = new DatabaseHelper(this);
+
+        printer = findViewById(R.id.Viewprinter);
+        printer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewimageActivity.this,ChoiceimageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //============================================
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
@@ -52,6 +65,8 @@ public class ViewimageActivity extends AppCompatActivity {
 
         }
         recyclerView.setAdapter(myAdapter);
+
+
 
     }
 }

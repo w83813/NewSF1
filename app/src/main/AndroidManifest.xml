@@ -37,7 +37,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".ViewimageActivity"></activity>
+        <activity android:name=".ChoiceimageActivity"></activity>
+        <activity android:name=".ViewimageActivity" />
         <activity android:name=".WaitviewimageActivity" />
         <activity android:name=".PatientlistActivity" />
         <activity android:name=".Addexamination_examination" />
