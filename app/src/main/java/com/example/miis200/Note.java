@@ -49,9 +49,7 @@ public class Note implements Parcelable {
 
     @Override
     public String toString() {
-        return "Note{" +
-                "title='" + Imagepath + '\'' +
-                '}';
+        return Imagepath;
     }
 
 
