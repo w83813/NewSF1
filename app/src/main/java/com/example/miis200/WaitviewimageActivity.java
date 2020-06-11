@@ -23,9 +23,9 @@ public class WaitviewimageActivity extends AppCompatActivity {
     Intent mViewimageActivityIntent,mChoiceimageActivityIntent;
 
     private RecyclerView recyclerView;
-    private Eyeimage_ItemRecycler itemRecyclerSetting;
     private Eyeimage_MyAdapter myAdapter;
     private List<Eyeimage_ItemRecycler> listRecycler = new ArrayList<Eyeimage_ItemRecycler>(  );
+    private Eyeimage_ItemRecycler itemRecyclerSetting;
 
     String patientid;
 
