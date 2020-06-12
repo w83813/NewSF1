@@ -1,6 +1,8 @@
 package com.example.miis200;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +14,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListPopupWindow;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
@@ -22,6 +25,7 @@ import java.util.List;
 
 public class ViewimageActivity extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteListener, FloatingActionButton.OnClickListener {
 
+    private static final String TAG = "ViewimageActivity";
     DatabaseHelper databaseHelper;
     String patientid;
 
@@ -89,6 +93,12 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
         String imagepath = mNotes.get(position).toString();
         Bitmap bitmap = BitmapFactory.decodeFile(imagepath,options);
         viewimg.setImageBitmap(bitmap);
+        Log.v("asdasdasd","dasdasdasdasdasdas");
+
+        SQLiteDatabase idDB = databaseHelper.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("MEMO","111111111111111111");
+        idDB.update("TABLE2",values, "PATIENTID=? and IMAGEPATH=?", new String[]{patientid,imagepath});
     }
 
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
