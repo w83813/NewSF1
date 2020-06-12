@@ -24,13 +24,13 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="2d08a456-9202-4d07-8e12-c9de27df55f4">
+      <connection connection-id="43563f4b-cd26-4077-bad9-2107c880bb76">
         <schema name="main" object-types="view, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="2d08a456-9202-4d07-8e12-c9de27df55f4">
+    <connection id="43563f4b-cd26-4077-bad9-2107c880bb76">
       <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from table2]]></console>
     </connection>
   </component>
@@ -38,7 +38,7 @@
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="2d08a456-9202-4d07-8e12-c9de27df55f4" />
+    <connection id="43563f4b-cd26-4077-bad9-2107c880bb76" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -63,7 +63,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="2d08a456-9202-4d07-8e12-c9de27df55f4" active="true">
+      <connection id="43563f4b-cd26-4077-bad9-2107c880bb76" active="true">
         <database>
           <name value="Connection" />
           <description value="" />

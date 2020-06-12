@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListPopupWindow;
+import android.widget.Toast;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
@@ -37,6 +38,8 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
     private ArrayList<Note> mNotes = new ArrayList<>();
     private Note note;
     private BitmapFactory.Options options;
+    int lastposition=0;
+    List<String> list = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +47,6 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
         setContentView(R.layout.activity_viewimage);
         mRecyclerView = findViewById(R.id.recycleView);
         viewimg = findViewById(R.id.viewimg);
-
-
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -79,6 +80,7 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
             mNoteRecyclerAdapter.addData(mNoteRecyclerAdapter.getItemCount(),note);
         }
         mRecyclerView.setAdapter(mNoteRecyclerAdapter);
+        autoclick();
 
     }
 
@@ -89,16 +91,19 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
 
     @Override
     public void onNoteClick(int position) {
-        Log.v("mkmkmk",String.valueOf(mNotes.get(position)));
+        Log.v(TAG,String.valueOf(mNotes.get(position)));
+        list.add(mNotes.get(position).toString());
+        for (int i=0;i<list.size();i++){
+            Log.v(TAG,String.valueOf(list.get(i)));
+        }
         String imagepath = mNotes.get(position).toString();
         Bitmap bitmap = BitmapFactory.decodeFile(imagepath,options);
         viewimg.setImageBitmap(bitmap);
-        Log.v("asdasdasd","dasdasdasdasdasdas");
 
         SQLiteDatabase idDB = databaseHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
-        values.put("MEMO","111111111111111111");
-        idDB.update("TABLE2",values, "PATIENTID=? and IMAGEPATH=?", new String[]{patientid,imagepath});
+        values.put("MEMO",list.get(list.size()-1));
+        idDB.update("TABLE2",values, "PATIENTID=? and IMAGEPATH=?", new String[]{patientid,list.get(list.size()-1)});
     }
 
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
@@ -112,6 +117,14 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
 
         }
     };
+
+
+    public void autoclick() {
+        String imagepath = mNotes.get(0).toString();
+        Bitmap bitmap = BitmapFactory.decodeFile(imagepath,options);
+        viewimg.setImageBitmap(bitmap);
+        list.add(mNotes.get(0).toString());
+    }
 
 
 }
