@@ -31,6 +31,7 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
     private static final String TAG = "ViewimageActivity";
     DatabaseHelper databaseHelper;
     String patientid;
+    private int imagesize;
 
     private Button printer;
     private PhotoView viewimg;
@@ -43,6 +44,8 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
     private BitmapFactory.Options options;
     List<String> list = new ArrayList<String>();
     private String last_imagepath,now_imagepath;
+    SQLiteDatabase idDB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
         mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes, this);
 
         databaseHelper = new DatabaseHelper(this);
+        idDB = databaseHelper.getReadableDatabase();
 
         options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.RGB_565;
@@ -73,51 +77,37 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
             }
         });
 
-
-
         Intent intent = this.getIntent();
         patientid = intent.getStringExtra("patientid");
-        int imagesize = databaseHelper.getImagePath(patientid).size();
+        imagesize = databaseHelper.getImagePath(patientid).size();
         for (int i=0; i<imagesize; i++){
             Bitmap thumbnail = BitmapFactory.decodeFile((String) databaseHelper.getImagePath(patientid).get(i), options);
             note = new Note(thumbnail,(String) databaseHelper.getImagePath(patientid).get(i));
             mNoteRecyclerAdapter.addData(mNoteRecyclerAdapter.getItemCount(),note);
         }
         mRecyclerView.setAdapter(mNoteRecyclerAdapter);
-        //autoclick();
         onNoteClick(0);
-
     }
 
     @Override
     public void onClick(View v) {
-
     }
 
     @Override
     public void onNoteClick(int position) {
-
-
-        SQLiteDatabase idDB = databaseHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
-
         if(list.size() != 0) {
-
-
             values.put("MEMO", memo.getText().toString());
             idDB.update("TABLE2", values, "PATIENTID=? and IMAGEPATH=?", new String[]{patientid, list.get(list.size()-1)});
             Cursor cursor = idDB.query("TABLE2", null, "PATIENTID=? and IMAGEPATH=?", new String[]{patientid, mNotes.get(position).toString()}, null, null, null);
             cursor.moveToNext();
             String Memo = cursor.getString(cursor.getColumnIndex("MEMO"));
             memo.setText(Memo);
-
         }
-
         list.add(mNotes.get(position).toString());
         now_imagepath = mNotes.get(position).toString();
         Bitmap bitmap = BitmapFactory.decodeFile(now_imagepath, options);
         viewimg.setImageBitmap(bitmap);
-
     }
 
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
@@ -125,14 +115,17 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
             return false;
         }
-
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
         }
     };
 
-
-
-
+    public void onBackPressed() {
+        ContentValues values = new ContentValues();
+        for (int i=0; i<imagesize; i++){
+            values.put("MEMO", "");
+            idDB.update("TABLE2", values, "PATIENTID=? and IMAGEPATH=?", new String[]{patientid, (String) databaseHelper.getImagePath(patientid).get(i)});
+        }
+        finish();
+    }
 }

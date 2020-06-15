@@ -123,6 +123,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return arrayList;
     }
 
+
+    public ArrayList getMemo(String patientid){
+        //Get Readtable Database
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        ArrayList<String> arrayList = new ArrayList<>();
+        //Perform RawQuery
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE2+" WHERE PATIENTID="+patientid, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            arrayList.add(cursor.getString(cursor.getColumnIndex("MEMO")));
+            cursor.moveToNext();
+        }
+        return arrayList;
+    }
+
     //query for 0 status
     public Cursor getListContents0() {
         SQLiteDatabase db = this.getWritableDatabase();

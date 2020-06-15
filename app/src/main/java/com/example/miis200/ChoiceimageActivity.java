@@ -71,11 +71,12 @@ public class ChoiceimageActivity extends AppCompatActivity {
         choiceimageItemrecyclers = new ArrayList<>();
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.RGB_565;
+        Bitmap thumbnail;
 
         for (int i=0; i<imagesize; i++){
-            Bitmap thumbnail = BitmapFactory.decodeFile((String) databaseHelper.getImagePath(patientid).get(i), options);
+            thumbnail = BitmapFactory.decodeFile((String) databaseHelper.getImagePath(patientid).get(i), options);
             ChoiceimageItemrecycler choiceimageItemrecycler = new ChoiceimageItemrecycler();
-            choiceimageItemrecycler.setName((String) databaseHelper.getImagePath(patientid).get(i));
+            choiceimageItemrecycler.setName((String) databaseHelper.getMemo(patientid).get(i));
             choiceimageItemrecycler.setEyeimage(thumbnail);
             choiceimageItemrecyclers.add(choiceimageItemrecycler);
         }
