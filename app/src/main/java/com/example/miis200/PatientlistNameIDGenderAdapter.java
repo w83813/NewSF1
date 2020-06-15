@@ -12,13 +12,13 @@ import java.util.ArrayList;
 /**
  * Created by Mitch on 2016-05-06.
  */
-public class ThreeColumn_ListAdapter extends ArrayAdapter<User> {
+public class PatientlistNameIDGenderAdapter extends ArrayAdapter<PatientlistItemRecycler> {
 
     private LayoutInflater mInflater;
-    private ArrayList<User> users;
+    private ArrayList<PatientlistItemRecycler> users;
     private int mViewResourceId;
 
-    public ThreeColumn_ListAdapter(Context context, int textViewResourceId, ArrayList<User> users) {
+    public PatientlistNameIDGenderAdapter(Context context, int textViewResourceId, ArrayList<PatientlistItemRecycler> users) {
         super(context, textViewResourceId, users);
         this.users = users;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -28,7 +28,7 @@ public class ThreeColumn_ListAdapter extends ArrayAdapter<User> {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = mInflater.inflate(mViewResourceId, null);
 
-        User user = users.get(position);
+        PatientlistItemRecycler user = users.get(position);
 
         if (user != null) {
             TextView patientName = (TextView) convertView.findViewById(R.id.textFirstName);

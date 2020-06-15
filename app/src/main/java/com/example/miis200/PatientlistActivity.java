@@ -20,9 +20,9 @@ public class PatientlistActivity extends AppCompatActivity {
     public static String WORKFLOW="Workflow";
 
     DatabaseHelper databaseHelper;
-    ArrayList<User> patientlist;
+    ArrayList<PatientlistItemRecycler> patientlist;
     ListView patientlistview;
-    User user;
+    PatientlistItemRecycler user;
     Cursor data;
     Intent mExaminationIntent,mWaitviewimageIntent,mWaitprinterIntent;
 
@@ -61,13 +61,13 @@ public class PatientlistActivity extends AppCompatActivity {
         }else{
             int i=0;
             while(data.moveToNext()){
-                user = new User(data.getString(1),data.getString(2),data.getString(3),data.getString(4),data.getString(5));
+                user = new PatientlistItemRecycler(data.getString(1),data.getString(2),data.getString(3),data.getString(4),data.getString(5));
                 patientlist.add(i,user);
                 System.out.println(data.getString(1)+" "+data.getString(2)+" "+data.getString(3)+" "+data.getString(4)+" "+data.getString(5));
                 i++;
             }
         }
-        ThreeColumn_ListAdapter adapter =  new ThreeColumn_ListAdapter(this,R.layout.list_adapter_view, patientlist);
+        PatientlistNameIDGenderAdapter adapter =  new PatientlistNameIDGenderAdapter(this,R.layout.list_adapter_view, patientlist);
         patientlistview = (ListView) findViewById(R.id.patientlistview);
         patientlistview.setAdapter(adapter);
         patientlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

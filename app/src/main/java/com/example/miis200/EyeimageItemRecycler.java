@@ -3,12 +3,12 @@ package com.example.miis200;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-public class Eyeimage_ItemRecycler {
+public class EyeimageItemRecycler {
     private Bitmap mImage;
 
     private String mName;
 
-    public Eyeimage_ItemRecycler(Bitmap mImg, String mName){
+    public EyeimageItemRecycler(Bitmap mImg, String mName){
         this.mImage = mImg;
         Log.i("imgimgimgimg",String.valueOf(mImg));
         this.mName = mName;

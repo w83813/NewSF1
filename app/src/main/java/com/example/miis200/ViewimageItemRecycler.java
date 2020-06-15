@@ -3,34 +3,33 @@ package com.example.miis200;
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.provider.ContactsContract;
 
 
-public class Note implements Parcelable {
+public class ViewimageItemRecycler implements Parcelable {
 
     private Bitmap Image;
     private String Imagepath;
 
-    public Note(Bitmap mImage, String mImagepath) {
+    public ViewimageItemRecycler(Bitmap mImage, String mImagepath) {
         this.Image = mImage;
         this.Imagepath = mImagepath;
     }
 
 
 
-    protected Note(Parcel in) {
+    protected ViewimageItemRecycler(Parcel in) {
         Imagepath = in.readString();
     }
 
-    public static final Creator<Note> CREATOR = new Creator<Note>() {
+    public static final Creator<ViewimageItemRecycler> CREATOR = new Creator<ViewimageItemRecycler>() {
         @Override
-        public Note createFromParcel(Parcel in) {
-            return new Note(in);
+        public ViewimageItemRecycler createFromParcel(Parcel in) {
+            return new ViewimageItemRecycler(in);
         }
 
         @Override
-        public Note[] newArray(int size) {
-            return new Note[size];
+        public ViewimageItemRecycler[] newArray(int size) {
+            return new ViewimageItemRecycler[size];
         }
     };
 

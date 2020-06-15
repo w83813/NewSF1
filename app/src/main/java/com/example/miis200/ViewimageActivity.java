@@ -12,21 +12,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListPopupWindow;
-import android.widget.Toast;
 
 import com.github.chrisbanes.photoview.PhotoView;
-
-import org.opencv.photo.Photo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewimageActivity extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteListener, FloatingActionButton.OnClickListener {
+public class ViewimageActivity extends AppCompatActivity implements ViewimageAdapter.OnNoteListener, FloatingActionButton.OnClickListener {
 
     private static final String TAG = "ViewimageActivity";
     DatabaseHelper databaseHelper;
@@ -38,9 +33,9 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
     private EditText memo;
 
     private RecyclerView mRecyclerView;
-    private NotesRecyclerAdapter mNoteRecyclerAdapter;
-    private ArrayList<Note> mNotes = new ArrayList<>();
-    private Note note;
+    private ViewimageAdapter mNoteRecyclerAdapter;
+    private ArrayList<ViewimageItemRecycler> mNotes = new ArrayList<>();
+    private ViewimageItemRecycler note;
     private BitmapFactory.Options options;
     List<String> list = new ArrayList<String>();
     private String last_imagepath,now_imagepath;
@@ -60,7 +55,7 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
-        mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes, this);
+        mNoteRecyclerAdapter = new ViewimageAdapter(mNotes, this);
 
         databaseHelper = new DatabaseHelper(this);
         idDB = databaseHelper.getReadableDatabase();
@@ -82,7 +77,7 @@ public class ViewimageActivity extends AppCompatActivity implements NotesRecycle
         imagesize = databaseHelper.getImagePath(patientid).size();
         for (int i=0; i<imagesize; i++){
             Bitmap thumbnail = BitmapFactory.decodeFile((String) databaseHelper.getImagePath(patientid).get(i), options);
-            note = new Note(thumbnail,(String) databaseHelper.getImagePath(patientid).get(i));
+            note = new ViewimageItemRecycler(thumbnail,(String) databaseHelper.getImagePath(patientid).get(i));
             mNoteRecyclerAdapter.addData(mNoteRecyclerAdapter.getItemCount(),note);
         }
         mRecyclerView.setAdapter(mNoteRecyclerAdapter);

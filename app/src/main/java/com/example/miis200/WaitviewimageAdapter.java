@@ -1,7 +1,6 @@
 package com.example.miis200;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -13,13 +12,13 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class WaitviewimageAdapter extends RecyclerView.Adapter<WaitviewimageAdapter.ViewHolder> {
     //动态数组
-    public List<Addexamination_ItemRecycler> itemRecyclers;
+    public List<EyeimageItemRecycler> itemRecyclers;
 
     private String ImagePath;
     //构造
-    public MyAdapter(List<Addexamination_ItemRecycler> itemRecyclers) {
+    public WaitviewimageAdapter(List<EyeimageItemRecycler> itemRecyclers) {
         this.itemRecyclers = itemRecyclers;
     }
 
@@ -34,7 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //绑定行布局
-        View view = View.inflate(parent.getContext(),R.layout.activity_addexamination_item_recycler,null);
+        View view = View.inflate(parent.getContext(),R.layout.eyeimage_item_recycler,null);
         //实例化ViewHolder
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -44,10 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         //获取当前实体类对象
-        Addexamination_ItemRecycler irs = itemRecyclers.get(position);
-        //设置
-        holder.text.setText(irs.getmName());
-        System.out.println("iiiiiirrrrrsss : " + irs.getmName());
+        EyeimageItemRecycler irs = itemRecyclers.get(position);
         holder.img.setImageBitmap(irs.getmImg());
         System.out.println("iiiiiirrrrrsss : " + irs.getmImg());
     }
@@ -77,6 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(),"click " +getAdapterPosition(),Toast.LENGTH_SHORT).show();
                     ImagePath = getData(getAdapterPosition()).getmName();
+                    Log.v("ddddddddddddddddd", ImagePath);
 
                     if (ImagePath.indexOf("/") != 0){
                         ImagePath = "/storage/emulated/0/1.MiiS/2.IMAGE/" + ImagePath;
@@ -88,21 +85,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 }
             } );
 
-            // 點擊項目中的Button時
-            delete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // 移除項目，getAdapterPosition為點擊的項目位置
-                    removeItem(getAdapterPosition());
-
-                }
-            });
 
         }
     }
 
 
-    public void addData(int position, Addexamination_ItemRecycler recyclerItem) {
+    public void addData(int position, EyeimageItemRecycler recyclerItem) {
         itemRecyclers.add(position, recyclerItem);
     }
 
@@ -113,11 +101,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
 
-    public Addexamination_ItemRecycler getData(int position) {
+    public EyeimageItemRecycler getData(int position) {
         return itemRecyclers.get(position);
     }
 
-    public Addexamination_ItemRecycler getRemoveData(int position) {
+    public EyeimageItemRecycler getRemoveData(int position) {
         return itemRecyclers.remove(position);
     }
 

@@ -3,11 +3,11 @@ package com.example.miis200;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-public class Addexamination_ItemRecycler {
+public class AddexaminationItemRecycler {
     private Bitmap mImage;
     private String mName;
 
-    public Addexamination_ItemRecycler(Bitmap mImg, String mName){
+    public AddexaminationItemRecycler(Bitmap mImg, String mName){
         this.mImage = mImg;
         Log.i("imgimgimgimg",String.valueOf(mImg));
         this.mName = mName;

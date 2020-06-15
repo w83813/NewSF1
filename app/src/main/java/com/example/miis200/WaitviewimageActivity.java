@@ -23,9 +23,9 @@ public class WaitviewimageActivity extends AppCompatActivity {
     Intent mViewimageActivityIntent,mChoiceimageActivityIntent;
 
     private RecyclerView recyclerView;
-    private Eyeimage_MyAdapter myAdapter;
-    private List<Eyeimage_ItemRecycler> listRecycler = new ArrayList<Eyeimage_ItemRecycler>(  );
-    private Eyeimage_ItemRecycler itemRecyclerSetting;
+    private WaitviewimageAdapter myAdapter;
+    private List<EyeimageItemRecycler> listRecycler = new ArrayList<EyeimageItemRecycler>(  );
+    private EyeimageItemRecycler itemRecyclerSetting;
 
     String patientid;
 
@@ -43,7 +43,7 @@ public class WaitviewimageActivity extends AppCompatActivity {
         //设置
         recyclerView.setLayoutManager(manager);
         //实例化适配器
-        myAdapter = new Eyeimage_MyAdapter(listRecycler);
+        myAdapter = new WaitviewimageAdapter(listRecycler);
         //设置适配器
 
         //============================================
@@ -83,7 +83,7 @@ public class WaitviewimageActivity extends AppCompatActivity {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.RGB_565;
             Bitmap thumbnail = BitmapFactory.decodeFile((String) databaseHelper.getImagePath(patientid).get(i), options);
-            itemRecyclerSetting = new Eyeimage_ItemRecycler(thumbnail, (String) databaseHelper.getImagePath(patientid).get(i));
+            itemRecyclerSetting = new EyeimageItemRecycler(thumbnail, (String) databaseHelper.getImagePath(patientid).get(i));
                     myAdapter.addData(myAdapter.getItemCount(), itemRecyclerSetting);
 
         }

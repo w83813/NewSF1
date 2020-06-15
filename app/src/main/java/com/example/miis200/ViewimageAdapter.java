@@ -7,20 +7,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdapter.ViewHolder> {
+public class ViewimageAdapter extends RecyclerView.Adapter<ViewimageAdapter.ViewHolder> {
 
     private static final String TAG = "NotesRecyclerAdapter";
 
-    private ArrayList<Note> mNotes;
+    private ArrayList<ViewimageItemRecycler> mNotes;
     private OnNoteListener mOnNoteListener;
 
-    public NotesRecyclerAdapter(ArrayList<Note> mNotes, OnNoteListener onNoteListener) {
+    public ViewimageAdapter(ArrayList<ViewimageItemRecycler> mNotes, OnNoteListener onNoteListener) {
         this.mNotes = mNotes;
         this.mOnNoteListener = onNoteListener;
     }
@@ -36,7 +34,7 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         try{
-            Note irs = mNotes.get(position);
+            ViewimageItemRecycler irs = mNotes.get(position);
             holder.imageView.setImageBitmap(irs.getImage());
         }catch (NullPointerException e){
             Log.e(TAG, "onBindViewHolder: Null Pointer: " + e.getMessage() );
@@ -73,7 +71,7 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
         void onNoteClick(int position);
     }
 
-    public void addData(int position, Note note) {
+    public void addData(int position, ViewimageItemRecycler note) {
         mNotes.add(position, note);
     }
 

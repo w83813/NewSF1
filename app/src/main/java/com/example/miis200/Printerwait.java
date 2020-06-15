@@ -1,18 +1,13 @@
 package com.example.miis200;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.miis200.utils.WifiUtil;
 
@@ -29,9 +24,9 @@ public class Printerwait extends AppCompatActivity {
 
 
 
-    ArrayList<User> userList;
+    ArrayList<PatientlistItemRecycler> userList;
     ListView listView;
-    User user;
+    PatientlistItemRecycler user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -14,14 +14,14 @@ import java.util.ArrayList;
 public class ChoiceimageAdapter extends RecyclerView.Adapter<ChoiceimageAdapter.MultiViewHolder> {
 
     private Context context;
-    private ArrayList<ChoiceimageItemrecycler> choiceimageItemrecyclers;
+    private ArrayList<ChoiceimageItemRecycler> choiceimageItemrecyclers;
 
-    public ChoiceimageAdapter(Context context, ArrayList<ChoiceimageItemrecycler> choiceimageItemrecyclers) {
+    public ChoiceimageAdapter(Context context, ArrayList<ChoiceimageItemRecycler> choiceimageItemrecyclers) {
         this.context = context;
         this.choiceimageItemrecyclers = choiceimageItemrecyclers;
     }
 
-    public void setChoiceimageItemrecyclers(ArrayList<ChoiceimageItemrecycler> choiceimageItemrecyclers) {
+    public void setChoiceimageItemrecyclers(ArrayList<ChoiceimageItemRecycler> choiceimageItemrecyclers) {
         this.choiceimageItemrecyclers = new ArrayList<>();
         this.choiceimageItemrecyclers = choiceimageItemrecyclers;
         notifyDataSetChanged();
@@ -57,7 +57,7 @@ public class ChoiceimageAdapter extends RecyclerView.Adapter<ChoiceimageAdapter.
 
         }
 
-        void bind(final ChoiceimageItemrecycler choiceimageItemrecycler) {
+        void bind(final ChoiceimageItemRecycler choiceimageItemrecycler) {
             imageView.setVisibility(choiceimageItemrecycler.isChecked() ? View.VISIBLE : View.GONE);
             textView.setText(choiceimageItemrecycler.getName());
             eyeimage.setImageBitmap(choiceimageItemrecycler.getEyeimage());
@@ -72,12 +72,12 @@ public class ChoiceimageAdapter extends RecyclerView.Adapter<ChoiceimageAdapter.
         }
     }
 
-    public ArrayList<ChoiceimageItemrecycler> getAll() {
+    public ArrayList<ChoiceimageItemRecycler> getAll() {
         return choiceimageItemrecyclers;
     }
 
-    public ArrayList<ChoiceimageItemrecycler> getSelected() {
-        ArrayList<ChoiceimageItemrecycler> selected = new ArrayList<>();
+    public ArrayList<ChoiceimageItemRecycler> getSelected() {
+        ArrayList<ChoiceimageItemRecycler> selected = new ArrayList<>();
         for (int i = 0; i < choiceimageItemrecyclers.size(); i++) {
             if (choiceimageItemrecyclers.get(i).isChecked()) {
                 selected.add(choiceimageItemrecyclers.get(i));

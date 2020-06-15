@@ -19,7 +19,7 @@ public class ChoiceimageActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
 
     private RecyclerView recyclerView;
-    private ArrayList<ChoiceimageItemrecycler> choiceimageItemrecyclers = new ArrayList<>();
+    private ArrayList<ChoiceimageItemRecycler> choiceimageItemrecyclers = new ArrayList<>();
     private ChoiceimageAdapter adapter;
     private Button btn_printer;
 
@@ -75,7 +75,7 @@ public class ChoiceimageActivity extends AppCompatActivity {
 
         for (int i=0; i<imagesize; i++){
             thumbnail = BitmapFactory.decodeFile((String) databaseHelper.getImagePath(patientid).get(i), options);
-            ChoiceimageItemrecycler choiceimageItemrecycler = new ChoiceimageItemrecycler();
+            ChoiceimageItemRecycler choiceimageItemrecycler = new ChoiceimageItemRecycler();
             choiceimageItemrecycler.setName((String) databaseHelper.getMemo(patientid).get(i));
             choiceimageItemrecycler.setEyeimage(thumbnail);
             choiceimageItemrecyclers.add(choiceimageItemrecycler);

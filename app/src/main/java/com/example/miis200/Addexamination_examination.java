@@ -182,9 +182,9 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
     RecyclerView recycleView;
 
     DatabaseHelper myDB;
-    ArrayList<User> userList;
+    ArrayList<PatientlistItemRecycler> userList;
     ListView listView;
-    User user;
+    PatientlistItemRecycler user;
 
 
     TextView pname,pid,pbir,pgender,pphone,pchecktime;
@@ -195,8 +195,8 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
 
 
     private RecyclerView recyclerView;
-    private List<Addexamination_ItemRecycler> listRecycler = new ArrayList<Addexamination_ItemRecycler>(  );
-    private MyAdapter myAdapter;
+    private List<AddexaminationItemRecycler> listRecycler = new ArrayList<AddexaminationItemRecycler>(  );
+    private AddexamationimageAdapter myAdapter;
     int checkInterval = 3000; //set return time
     Handler updateHandler; // return time
     boolean viewingList; // return time
@@ -233,7 +233,7 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
     private int adapterImageName;
     private ArrayList<String> totalData;
 
-    private Addexamination_ItemRecycler itemRecyclerSetting;
+    private AddexaminationItemRecycler itemRecyclerSetting;
 
 
     @Override
@@ -331,7 +331,7 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
         //设置
         recyclerView.setLayoutManager(manager);
         //实例化适配器
-        myAdapter = new MyAdapter(listRecycler);
+        myAdapter = new AddexamationimageAdapter(listRecycler);
         //设置适配器
         recyclerView.setAdapter(myAdapter);
 
@@ -385,7 +385,7 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
                 int adapterImageName = myAdapter.getItemCount();
                 ArrayList<String> totalData = new ArrayList<String>();
                 for(int i = 0 ; i < adapterImageName; i++) {
-                    Addexamination_ItemRecycler tmpData = myAdapter.getData( i);
+                    AddexaminationItemRecycler tmpData = myAdapter.getData( i);
                     Log.i("Data", tmpData.getmName());
                     totalData.add( tmpData.getmName());
                 }
@@ -1032,7 +1032,7 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
             Bitmap thumbnail = BitmapFactory.decodeFile(uriList.get(i).getPath(), options);
 
 
-            itemRecyclerSetting = new Addexamination_ItemRecycler(thumbnail, uriList.get(i).getPath());
+            itemRecyclerSetting = new AddexaminationItemRecycler(thumbnail, uriList.get(i).getPath());
             myAdapter.addData(myAdapter.getItemCount(), itemRecyclerSetting);
 
 
@@ -1069,7 +1069,7 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
                 int adapterImageName = myAdapter.getItemCount();
                 ArrayList<String> totalData = new ArrayList<String>();
                 for (int i = 0; i < adapterImageName; i++) {
-                    Addexamination_ItemRecycler tmpData = myAdapter.getData(i);
+                    AddexaminationItemRecycler tmpData = myAdapter.getData(i);
                     Log.i("Data", tmpData.getmName());
                     totalData.add(tmpData.getmName());
                 }
@@ -1476,7 +1476,7 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
 
                 Pattern p = Pattern.compile("[A-Z]+[0-9]+.jpg");
 
-                itemRecyclerSetting = new Addexamination_ItemRecycler(thumbnail, Imagename);
+                itemRecyclerSetting = new AddexaminationItemRecycler(thumbnail, Imagename);
                 System.out.println("oooooooooooooooooooaa : " + myAdapter.getItemCount());
                 myAdapter.addData(myAdapter.getItemCount(), itemRecyclerSetting);
                 mLastPictureName = Imagename;
