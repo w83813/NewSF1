@@ -78,7 +78,7 @@
             android:layout_weight="1">
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/memo"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="#17375e"

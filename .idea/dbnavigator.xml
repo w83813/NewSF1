@@ -23,14 +23,10 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="43563f4b-cd26-4077-bad9-2107c880bb76">
-        <schema name="main" object-types="view, table" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="43563f4b-cd26-4077-bad9-2107c880bb76">
+    <connection id="2af19c36-832d-4739-883d-47c134743344">
       <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from table2]]></console>
     </connection>
   </component>
@@ -38,7 +34,7 @@
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="43563f4b-cd26-4077-bad9-2107c880bb76" />
+    <connection id="2af19c36-832d-4739-883d-47c134743344" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -63,7 +59,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="43563f4b-cd26-4077-bad9-2107c880bb76" active="true">
+      <connection id="2af19c36-832d-4739-883d-47c134743344" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -78,7 +74,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\A00225\Desktop\db\product_database.db" schema="main" />
+            <file path="C:\Users\A00225\Desktop\db\product_database" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
