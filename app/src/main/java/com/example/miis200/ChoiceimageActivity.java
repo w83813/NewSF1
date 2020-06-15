@@ -32,6 +32,9 @@ public class ChoiceimageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choiceimage);
 
+        Intent intent = this.getIntent();
+        patientid = intent.getStringExtra("patientid");
+
         databaseHelper = new DatabaseHelper(this);
 
         recyclerView = findViewById(R.id.choiceimagerecyclerview);
@@ -67,6 +70,7 @@ public class ChoiceimageActivity extends AppCompatActivity {
                         choiceimagelist.add(adapter.getSelected().get(i).getMemo());
                     }
                     mReportInetent.putIntegerArrayListExtra("imagepathlist",choiceimagelist);
+                    mReportInetent.putExtra("patientid",patientid);
                     startActivity(mReportInetent);
                     //showToast(stringBuilder.toString().trim());
                 }
@@ -76,8 +80,6 @@ public class ChoiceimageActivity extends AppCompatActivity {
     }
 
     private void createList() {
-        Intent intent = this.getIntent();
-        patientid = intent.getStringExtra("patientid");
         int imagesize = databaseHelper.getImagePath(patientid).size();
 
         choiceimageItemrecyclers = new ArrayList<>();

@@ -31,6 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(table1);
         db.execSQL(table2);
         db.execSQL(table3);
+
     }
 
     @Override
@@ -118,6 +119,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             arrayList.add(cursor.getString(cursor.getColumnIndex("IMAGEPATH")));
+            cursor.moveToNext();
+        }
+        return arrayList;
+    }
+
+    public ArrayList getpatientinfo(String patientid){
+        //Get Readtable Database
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        ArrayList<String> arrayList = new ArrayList<>();
+        //Perform RawQuery
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE1+" WHERE PATIENTID="+patientid, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            arrayList.add(cursor.getString(cursor.getColumnIndex("NAME")));
+            arrayList.add(cursor.getString(cursor.getColumnIndex("PATIENTID")));
+            arrayList.add(cursor.getString(cursor.getColumnIndex("PHONENUMBER")));
+            arrayList.add(cursor.getString(cursor.getColumnIndex("BIRTHDAY")));
+            arrayList.add(cursor.getString(cursor.getColumnIndex("GENDER")));
+            arrayList.add(cursor.getString(cursor.getColumnIndex("CHECKTIME")));
+            arrayList.add(cursor.getString(cursor.getColumnIndex("AGE")));
             cursor.moveToNext();
         }
         return arrayList;

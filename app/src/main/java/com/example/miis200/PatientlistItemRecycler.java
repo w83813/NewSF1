@@ -8,7 +8,7 @@ public class PatientlistItemRecycler {
     private String PatientGender;
     private String PatientBir;
 
-    public PatientlistItemRecycler(String pName, String pId, String pPnum, String pGender, String pBir){
+    public PatientlistItemRecycler(String pName, String pId, String pPnum, String pBir, String pGender){
         PatientName = pName;
         PatientID = pId;
         PatientPnum = pPnum;
