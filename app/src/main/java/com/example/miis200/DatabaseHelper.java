@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //Create Insert Method
-    public boolean insertpatientinfo(String Name, String Patientid, String Phonenumber, String Birthday, String Gender, String Status){
+    public boolean insertpatientinfo(String Name, String Patientid, String Phonenumber, String Birthday, String Gender, String Status, String Age){
         //Get WriteAble Database
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values1.put("gender",Gender);
         values1.put("status",Status);
         values1.put("checktime","");
-        values1.put("age","");
+        values1.put("age",Age);
         //Insert Data into Database
         sqLiteDatabase.insert(TABLE1,null,values1);
         return true;

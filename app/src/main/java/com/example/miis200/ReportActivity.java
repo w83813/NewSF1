@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ReportActivity extends AppCompatActivity {
 
@@ -22,7 +24,10 @@ public class ReportActivity extends AppCompatActivity {
     private FrameLayout report_framelayout1,report_framelayout2,report_framelayout3,report_framelayout4;
     private LinearLayout layout_memo1,layout_memo2,layout_memo3,layout_memo4;
     DatabaseHelper databaseHelper;
-    private String getPatientid;
+    private String getPatientid,Reportdate;
+
+    private SimpleDateFormat simpleDateFormat;
+    private Date date;
 
     //patient info
     private TextView patientname,patientid,patientgender,patientage,patientphonenumber,patientcheckdate,patientreportdate;
@@ -61,6 +66,11 @@ public class ReportActivity extends AppCompatActivity {
         patientcheckdate = findViewById(R.id.report_checktime);
         patientreportdate = findViewById(R.id.report_date);
 
+
+        simpleDateFormat = new SimpleDateFormat( "yyyy年MM月dd日 ");
+        date = new Date( System.currentTimeMillis());
+        Reportdate = simpleDateFormat.format(date);
+
         Intent intent  =  getIntent();
         imagepathlist = intent.getStringArrayListExtra("imagepathlist");
         getPatientid = intent.getStringExtra("patientid");
@@ -68,15 +78,17 @@ public class ReportActivity extends AppCompatActivity {
         patientname.setText((String) databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(0));
         patientid.setText((String) databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(1));
         patientgender.setText((String) databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(4));
-        patientage.setText("");
+        patientage.setText((String) databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(6));
         patientphonenumber.setText((String) databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(2));
-        patientcheckdate.setText("");
-        patientreportdate.setText("");
+        patientcheckdate.setText((String) databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(5));
+        patientreportdate.setText(Reportdate);
 
 
         Log.v("aaaaaaaddddwwww",String.valueOf(databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(0)));
         Log.v("aaaaaaaddddwwww",String.valueOf(databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(1)));
         Log.v("aaaaaaaddddwwww",String.valueOf(databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(2)));
+        Log.v("aaaaaaaddddwwww",String.valueOf(databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(6)));
+        Log.v("aaaaaaaddddwwww",String.valueOf(databaseHelper.getpatientinfo(intent.getStringExtra("patientid")).get(5)));
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.RGB_565;

@@ -123,7 +123,7 @@ public class AddPatient extends AppCompatActivity {
                     String patientbirthday = Patientbirthday.getText().toString();
 
                     if(!patientname.isEmpty() && !patientid.isEmpty() && !patientphonenumber.isEmpty() && !patientgender.isEmpty() && !patientbirthday.isEmpty()){
-                        if(databaseHelper.insertpatientinfo(patientname,patientid,patientphonenumber,patientbirthday,patientgender,"0")){
+                        if(databaseHelper.insertpatientinfo(patientname,patientid,patientphonenumber,patientbirthday,patientgender,"0",Age)){
                             //Display Toast Message
                             Toast.makeText(getApplicationContext(),"Data Inserted..",Toast.LENGTH_SHORT).show();
                             //Clear Edit
