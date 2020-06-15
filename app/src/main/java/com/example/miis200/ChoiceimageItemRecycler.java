@@ -16,21 +16,32 @@ public class ChoiceimageItemRecycler implements Serializable {
         isChecked = checked;
     }
 
-    private String name;
+    private String memo;
+
+    private String imagepath;
 
     private Bitmap eyeimage;
 
-    public String getName() {
-        return name;
+    public String getMemo() {
+        return memo;
+    }
+
+    public String getImagepath() {
+        return imagepath;
     }
 
     public Bitmap getEyeimage() {
         return eyeimage;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
+    }
+
     public void setEyeimage(Bitmap meyeimage) {
         this.eyeimage = meyeimage;
     }

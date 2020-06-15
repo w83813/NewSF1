@@ -28,7 +28,7 @@ public class ViewimageActivity extends AppCompatActivity implements ViewimageAda
     String patientid;
     private int imagesize;
 
-    private Button printer;
+    private Button printer,viewfinish;
     private PhotoView viewimg;
     private EditText memo;
 
@@ -49,6 +49,8 @@ public class ViewimageActivity extends AppCompatActivity implements ViewimageAda
         mRecyclerView = findViewById(R.id.recycleView);
         viewimg = findViewById(R.id.viewimg);
         memo = findViewById(R.id.memo);
+        viewfinish = findViewById(R.id.Viewfinish);
+        printer = findViewById(R.id.Viewprinter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -63,7 +65,13 @@ public class ViewimageActivity extends AppCompatActivity implements ViewimageAda
         options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.RGB_565;
 
-        printer = findViewById(R.id.Viewprinter);
+        viewfinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         printer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

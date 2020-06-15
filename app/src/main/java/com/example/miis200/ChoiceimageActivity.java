@@ -22,6 +22,8 @@ public class ChoiceimageActivity extends AppCompatActivity {
     private ArrayList<ChoiceimageItemRecycler> choiceimageItemrecyclers = new ArrayList<>();
     private ChoiceimageAdapter adapter;
     private Button btn_printer;
+    private ArrayList choiceimagelist;
+    private Intent mReportInetent;
 
     String patientid;
 
@@ -36,16 +38,21 @@ public class ChoiceimageActivity extends AppCompatActivity {
 
         btn_printer = findViewById(R.id.chimg_printer);
 
+        mReportInetent = new Intent(this,ReportActivity.class);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         adapter = new ChoiceimageAdapter(this, choiceimageItemrecyclers);
         recyclerView.setAdapter(adapter);
+
+
 
         createList();
 
         btn_printer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                choiceimagelist = new ArrayList();
                 if(adapter.getSelected().size() == 0){
                     showToast("No Selection.");
                 } else if(adapter.getSelected().size() > 4){
@@ -53,10 +60,15 @@ public class ChoiceimageActivity extends AppCompatActivity {
                 } else {
                     StringBuilder stringBuilder = new StringBuilder();
                     for (int i = 0; i < adapter.getSelected().size(); i++) {
-                        stringBuilder.append(adapter.getSelected().get(i).getName());
-                        stringBuilder.append("\n");
+                        //stringBuilder.append(adapter.getSelected().get(i).getMemo());
+                        //stringBuilder.append(adapter.getSelected().get(i).getImagepath());
+                        //stringBuilder.append("\n");
+                        choiceimagelist.add(adapter.getSelected().get(i).getImagepath());
+                        choiceimagelist.add(adapter.getSelected().get(i).getMemo());
                     }
-                    showToast(stringBuilder.toString().trim());
+                    mReportInetent.putIntegerArrayListExtra("imagepathlist",choiceimagelist);
+                    startActivity(mReportInetent);
+                    //showToast(stringBuilder.toString().trim());
                 }
             }
         });
@@ -76,8 +88,9 @@ public class ChoiceimageActivity extends AppCompatActivity {
         for (int i=0; i<imagesize; i++){
             thumbnail = BitmapFactory.decodeFile((String) databaseHelper.getImagePath(patientid).get(i), options);
             ChoiceimageItemRecycler choiceimageItemrecycler = new ChoiceimageItemRecycler();
-            choiceimageItemrecycler.setName((String) databaseHelper.getMemo(patientid).get(i));
+            choiceimageItemrecycler.setMemo((String) databaseHelper.getMemo(patientid).get(i));
             choiceimageItemrecycler.setEyeimage(thumbnail);
+            choiceimageItemrecycler.setImagepath((String) databaseHelper.getImagePath(patientid).get(i));
             choiceimageItemrecyclers.add(choiceimageItemrecycler);
         }
         adapter.setChoiceimageItemrecyclers(choiceimageItemrecyclers);

@@ -48,6 +48,7 @@ public class ChoiceimageAdapter extends RecyclerView.Adapter<ChoiceimageAdapter.
 
         private TextView textView;
         private ImageView imageView,eyeimage;
+        private String imagepath;
 
         MultiViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,8 +60,9 @@ public class ChoiceimageAdapter extends RecyclerView.Adapter<ChoiceimageAdapter.
 
         void bind(final ChoiceimageItemRecycler choiceimageItemrecycler) {
             imageView.setVisibility(choiceimageItemrecycler.isChecked() ? View.VISIBLE : View.GONE);
-            textView.setText(choiceimageItemrecycler.getName());
+            textView.setText(choiceimageItemrecycler.getMemo());
             eyeimage.setImageBitmap(choiceimageItemrecycler.getEyeimage());
+            imagepath = choiceimageItemrecycler.getImagepath();
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
