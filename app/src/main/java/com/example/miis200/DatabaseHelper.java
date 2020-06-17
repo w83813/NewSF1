@@ -101,7 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         ArrayList<String> arrayList = new ArrayList<>();
         //Perform RawQuery
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE1+" WHERE PATIENTID="+patientid, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE1+" WHERE PATIENTID="+"\""+patientid+"\"", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             arrayList.add(cursor.getString(cursor.getColumnIndex("CHECKTIME")));
@@ -115,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         ArrayList<String> arrayList = new ArrayList<>();
         //Perform RawQuery
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE2+" WHERE PATIENTID="+patientid, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE2+" WHERE PATIENTID="+"\""+patientid+"\"", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             arrayList.add(cursor.getString(cursor.getColumnIndex("IMAGEPATH")));
@@ -129,7 +129,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         ArrayList<String> arrayList = new ArrayList<>();
         //Perform RawQuery
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE1+" WHERE PATIENTID="+patientid, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE1+" WHERE PATIENTID="+"\""+patientid+"\"", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             arrayList.add(cursor.getString(cursor.getColumnIndex("NAME")));
@@ -150,7 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         ArrayList<String> arrayList = new ArrayList<>();
         //Perform RawQuery
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE2+" WHERE PATIENTID="+patientid, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE2+" WHERE PATIENTID="+"\""+patientid+"\"", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             arrayList.add(cursor.getString(cursor.getColumnIndex("MEMO")));
@@ -185,6 +185,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("STATUS","1");
         values.put("CHECKTIME",checktime);
+        idDB.update("TABLE1",values, "PATIENTID=?", new String[]{patientid});
+    }
+
+    public void updatepatientstatus_2(String patientid){
+        SQLiteDatabase idDB = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("STATUS","2");
         idDB.update("TABLE1",values, "PATIENTID=?", new String[]{patientid});
     }
 

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Path;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class ViewimageActivity extends AppCompatActivity implements ViewimageAda
     List<String> list = new ArrayList<String>();
     private String last_imagepath,now_imagepath;
     SQLiteDatabase idDB;
+    private Intent mChoiceActivityIntent,mOptioinActivityIntent;
 
 
     @Override
@@ -50,7 +52,12 @@ public class ViewimageActivity extends AppCompatActivity implements ViewimageAda
         viewimg = findViewById(R.id.viewimg);
         memo = findViewById(R.id.memo);
         viewfinish = findViewById(R.id.Viewfinish);
-        printer = findViewById(R.id.Viewprinter);
+        printer = findViewById(R.id.viewimageprinter);
+
+        mChoiceActivityIntent = new Intent(this,ChoiceimageActivity.class);
+
+        mOptioinActivityIntent = new Intent(this,Option.class);
+        mOptioinActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -68,17 +75,14 @@ public class ViewimageActivity extends AppCompatActivity implements ViewimageAda
         viewfinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                ContentValues values = new ContentValues();
+                values.put("MEMO", memo.getText().toString());
+                idDB.update("TABLE2", values, "PATIENTID=? and IMAGEPATH=?", new String[]{patientid, list.get(list.size()-1)});
+                databaseHelper.updatepatientstatus_2(patientid);
+                startActivity(mOptioinActivityIntent);
             }
         });
 
-        printer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ViewimageActivity.this,ChoiceimageActivity.class);
-                startActivity(intent);
-            }
-        });
 
         Intent intent = this.getIntent();
         patientid = intent.getStringExtra("patientid");
@@ -90,6 +94,19 @@ public class ViewimageActivity extends AppCompatActivity implements ViewimageAda
         }
         mRecyclerView.setAdapter(mNoteRecyclerAdapter);
         onNoteClick(0);
+
+        printer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContentValues values = new ContentValues();
+                values.put("MEMO", memo.getText().toString());
+                idDB.update("TABLE2", values, "PATIENTID=? and IMAGEPATH=?", new String[]{patientid, list.get(list.size()-1)});
+                mChoiceActivityIntent.putExtra("patientid",patientid);
+                startActivity(mChoiceActivityIntent);
+            }
+        });
+
+
     }
 
     @Override

@@ -186,6 +186,8 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
     ListView listView;
     PatientlistItemRecycler user;
 
+    private Intent mViewimageActivityIntent,mChoiceActivityInetne;
+
 
     TextView pname,pid,pbir,pgender,pphone,pchecktime;
     String page;
@@ -285,6 +287,13 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
         pphone = findViewById( R.id.CheckPatientPhone );
         pchecktime = findViewById(R.id.Check_Time);
 
+        mViewimageActivityIntent = new Intent(this,ViewimageActivity.class);
+        mViewimageActivityIntent.putExtra("patientid",pID);
+
+        mChoiceActivityInetne = new Intent(this,ChoiceimageActivity.class);
+        mChoiceActivityInetne.putExtra("patientid",pID);
+
+
         simpleDateFormat = new SimpleDateFormat( "yyyy年MM月dd日 ");
         date = new Date( System.currentTimeMillis());
         checkTime = simpleDateFormat.format(date);
@@ -298,10 +307,10 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
         page = pAge;
 
         Button enter = (Button) findViewById(R.id.printer);
-        //enter.setOnClickListener(nextenter);
+        enter.setOnClickListener(nextprinter);
 
         Button view = (Button) findViewById(R.id.viewimage);
-        //view.setOnClickListener(nextview);
+        view.setOnClickListener(nextview);
 
         Button saveex = (Button) findViewById(R.id.saveexamination);
         saveex.setOnClickListener(nextsaveexamination);
@@ -378,33 +387,58 @@ public class Addexamination_examination extends AppCompatActivity implements BSI
 
     }
 
+    private Button.OnClickListener nextview = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (!Button_Click.isFastDoubleClick()) {
+                saveimagepath();
+                startActivity(mViewimageActivityIntent);
+            }
+        }
+    };
+
     private Button.OnClickListener nextsaveexamination = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (!Button_Click.isFastDoubleClick()) {
-                int adapterImageName = myAdapter.getItemCount();
-                ArrayList<String> totalData = new ArrayList<String>();
-                for(int i = 0 ; i < adapterImageName; i++) {
-                    AddexaminationItemRecycler tmpData = myAdapter.getData( i);
-                    Log.i("Data", tmpData.getmName());
-                    totalData.add( tmpData.getmName());
-                }
-                File fileport = Environment.getExternalStorageDirectory();
-                File imagefile = new File(fileport,"1.MiiS/2.IMAGE");
-                final ArrayList<String> imageList = (ArrayList<String>) (totalData);
-                for(int i = 0; i <imageList.size(); i++) {
-                    if (imageList.get(i).length() > 12){
-                        ImagePath = imageList.get(i);
-                    } else {
-                        ImagePath = imagefile + "/" + imageList.get(i);
-                    }
-                    myDB.insertImagePath(pID,ImagePath);
-                    myDB.insertchecktime(checkTime);
-                }
-                myDB.updateatientstatus(pID,checkTime);
+                saveimagepath();
+                finish();
             }
         }
     };
+
+    private Button.OnClickListener nextprinter = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (!Button_Click.isFastDoubleClick()) {
+                saveimagepath();
+                startActivity(mChoiceActivityInetne);
+            }
+        }
+    };
+
+
+    private void saveimagepath(){
+        int adapterImageName = myAdapter.getItemCount();
+        ArrayList<String> totalData = new ArrayList<String>();
+        for(int i = 0 ; i < adapterImageName; i++) {
+            AddexaminationItemRecycler tmpData = myAdapter.getData( i);
+            Log.i("Data", tmpData.getmName());
+            totalData.add( tmpData.getmName());
+        }
+        File fileport = Environment.getExternalStorageDirectory();
+        File imagefile = new File(fileport,"1.MiiS/2.IMAGE");
+        final ArrayList<String> imageList = (ArrayList<String>) (totalData);
+        for(int i = 0; i <imageList.size(); i++) {
+            if (imageList.get(i).length() > 12){
+                ImagePath = imageList.get(i);
+            } else {
+                ImagePath = imagefile + "/" + imageList.get(i);
+            }
+            myDB.insertImagePath(pID,ImagePath);
+        }
+        myDB.updateatientstatus(pID,checkTime);
+    }
 
     //获取权限
     private void getPerMission() {

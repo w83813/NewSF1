@@ -35,6 +35,8 @@ public class PatientlistActivity extends AppCompatActivity {
         mExaminationIntent = new Intent(this,Addexamination_examination.class);
         mWaitviewimageIntent = new Intent(this, WaitviewimageActivity.class);
 
+        mWaitprinterIntent = new Intent(this,ChoiceimageActivity.class);
+
         handleIntent(getIntent());
 
         databaseHelper = new DatabaseHelper(this);
@@ -93,6 +95,8 @@ public class PatientlistActivity extends AppCompatActivity {
                             startActivity(mWaitviewimageIntent);
                             break;
                         case WAITPRINTER:
+                            mWaitprinterIntent.putExtra("patientid",patientlist.get(position).getPatientID());
+                            startActivity(mWaitprinterIntent);
                             break;
                     }
                 }
