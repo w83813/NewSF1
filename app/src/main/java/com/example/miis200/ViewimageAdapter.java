@@ -64,6 +64,7 @@ public class ViewimageAdapter extends RecyclerView.Adapter<ViewimageAdapter.View
         public void onClick(View view) {
             Log.d(TAG, "onClick: " + getAdapterPosition());
             mOnNoteListener.onNoteClick(getAdapterPosition());
+
         }
     }
 

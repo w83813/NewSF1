@@ -16,7 +16,8 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text=""
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorWhite"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv1"
@@ -25,7 +26,33 @@
         android:gravity="center"
         android:text=""
         android:textColor="@color/colorWhite"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <EditText
+            android:id="@+id/review_patientid"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:hint="Please enter patientid"
+            android:inputType="text"
+            android:padding="5dp" />
+
+        <Button
+            android:id="@+id/review_search"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="@android:string/search_go" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/datafile"

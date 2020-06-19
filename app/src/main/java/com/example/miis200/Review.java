@@ -15,12 +15,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Review extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -29,6 +32,8 @@ public class Review extends AppCompatActivity implements AdapterView.OnItemClick
     TextView tv1,tv2;
     ListView listView;
     ArrayAdapter<String> listAdapter;
+    EditText review_patientid;
+    Button review_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +52,25 @@ public class Review extends AppCompatActivity implements AdapterView.OnItemClick
         tv1 = (TextView) findViewById( R.id.tv1 );
         tv2 = (TextView) findViewById( R.id.tv2 );
         listView = (ListView) findViewById( R.id.datafile );
+        review_patientid = findViewById(R.id.review_patientid);
+        review_search = findViewById(R.id.review_search);
 
-        fileMessage();
-
+        review_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String patientid = review_patientid.getText().toString();
+                System.out.println("ttttttttttttt1111"+patientid+"ttttttttttttt1111");
+                if (patientid.equals("")){
+                    Toast.makeText(Review.this, "Not enter patientid." , Toast.LENGTH_LONG).show();
+                } else {
+                    fileMessage(patientid);
+                }
+            }
+        });
 
     }
 
-    private void fileMessage(){
+    private void fileMessage(String patientid){
         File fileport = Environment.getExternalStorageDirectory();
         File file = new File( fileport,"1.MiiS/1.PDF");
         tv2.setText( R.string.Review_file_path + " : " + file );
@@ -73,9 +90,17 @@ public class Review extends AppCompatActivity implements AdapterView.OnItemClick
             Log.d("Files", "FileName:" + files[i].getName());
         }
 
+        List<String> listClone = new ArrayList<String>();
+        for (String string : fileNames) {
+            if (string.matches("(.*)"+patientid+"(.*)")) {
+                listClone.add(string);
+            }
+        }
+        System.out.println("ttttttttttttt" + listClone);
 
 
-        listAdapter = new ArrayAdapter<String>(Review.this, android.R.layout.simple_list_item_1, fileNames);
+
+        listAdapter = new ArrayAdapter<String>(Review.this, android.R.layout.simple_list_item_1, listClone);
 
         // Set the file list to a widget
         listView = (ListView)findViewById(R.id.datafile);
@@ -83,7 +108,6 @@ public class Review extends AppCompatActivity implements AdapterView.OnItemClick
         listView.setAdapter(listAdapter);
         listView.setBackgroundColor(Color.WHITE);
         listView.setOnItemClickListener(Review.this);
-
 
     }
 
